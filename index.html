@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Formulario Finanzas Comunitarias</title>
+  <title>Reporte</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <style>
@@ -82,19 +82,22 @@
 <body>
 
   <div class="form-container">
-    <h1>Registro Financiero</h1>
-    <p>Finanzas Comunitarias – Naturales Buenavida</p>
+    <h1>Reporte</h1>
+    <p>Naturales Buenavida</p>
 
-    <form id="registroForm">
+    <form>
 
-      <!-- ID AUTOMÁTICO -->
+      <!-- ID AUTOM�TICO -->
       <label for="id">ID</label>
       <input type="text" id="id" name="id" readonly>
 
       <!-- CONCEPTO -->
       <label for="concepto">Concepto</label>
-      <input type="text" id="concepto" name="concepto"
-             placeholder="Ej: Aporte ahorro comunitario" required>
+      <select id="concepto" name="concepto" required>
+        <option value="">Seleccione una opcion</option>
+        <option value="Pago">Pago</option>
+        <option value="Venta">Venta</option>
+      </select>
 
       <!-- FECHA -->
       <label for="fecha">Fecha</label>
@@ -108,14 +111,14 @@
       <!-- TIPO DE PAGO -->
       <label for="pago">Pago</label>
       <select id="pago" name="pago" required>
-        <option value="">Seleccione una opción</option>
+        <option value="">Seleccione una opcion</option>
         <option value="Efectivo">Efectivo</option>
         <option value="Nequi">Nequi</option>
         <option value="CTA AHORROS">CTA AHORROS</option>
         <option value="Otro">Otro</option>
       </select>
 
-      <!-- VALOR -->
+      <!-- VALOR EN PESOS -->
       <label for="valor">Valor (COP)</label>
       <input type="number" id="valor" name="valor"
              placeholder="Ej: 50000" required>
@@ -125,46 +128,11 @@
   </div>
 
   <script>
-    const form = document.getElementById("registroForm");
-
-    function generarID() {
-      const now = new Date();
-      const random = Math.floor(Math.random() * 1000);
-      return `ID-${now.getFullYear()}${now.getMonth()+1}${now.getDate()}-${random}`;
-    }
-
-    document.getElementById("id").value = generarID();
-
-    form.addEventListener("submit", function(e) {
-      e.preventDefault();
-
-      const data = {
-        id: document.getElementById("id").value,
-        concepto: document.getElementById("concepto").value,
-        fecha: document.getElementById("fecha").value,
-        observaciones: document.getElementById("observaciones").value,
-        pago: document.getElementById("pago").value,
-        valor: document.getElementById("valor").value
-      };
-
-      fetch("https://script.google.com/macros/s/AKfycbybs-Dxxuso6B4ohH1p_TUXx9PWF1QYIWJRj03YT31HNug7bf5L5IwcypXST9peYpLjfQ/exec", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-      })
-      .then(res => res.json())
-      .then(() => {
-        alert("Registro guardado correctamente ✅");
-        form.reset();
-        document.getElementById("id").value = generarID();
-      })
-      .catch(err => {
-        alert("Error al guardar ❌");
-        console.error(err);
-      });
-    });
+    // Generar ID autom�tico simple (fecha + aleatorio)
+    const idField = document.getElementById("id");
+    const now = new Date();
+    const random = Math.floor(Math.random() * 1000);
+    idField.value = `ID-${now.getFullYear()}${now.getMonth()+1}${now.getDate()}-${random}`;
   </script>
 
 </body>
