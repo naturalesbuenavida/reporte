@@ -1,3 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Reporte</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #eef7f1;
+      padding: 30px;
+    }
+
+    .form-container {
+      max-width: 520px;
+      margin: auto;
+      background: #ffffff;
+      padding: 24px;
+      border-radius: 14px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    }
+
+    h1 {
+      text-align: center;
+      color: #2f6e43;
+      margin-bottom: 8px;
+    }
+
+    p {
+      text-align: center;
+      font-size: 14px;
+      color: #5a6f60;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-top: 14px;
+      font-weight: 600;
+      color: #2f4833;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    input[readonly] {
+      background: #f1f5f3;
+      color: #555;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 70px;
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      background: #2f6e43;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #256037;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="form-container">
+    <h1>Reporte</h1>
+    <p>Naturales Buenavida</p>
+
+    <form>
+
+      <!-- ID AUTOMÁTICO -->
+      <label for="id">ID</label>
+      <input type="text" id="id" name="id" readonly>
+
+      <!-- CONCEPTO -->
+      <label for="concepto">Concepto</label>
+      <select id="concepto" name="concepto" required>
+        <option value="">Seleccione una opcion</option>
+        <option value="Pago">Pago</option>
+        <option value="Venta">Venta</option>
+      </select>
+
+      <!-- FECHA -->
+      <label for="fecha">Fecha</label>
+      <input type="date" id="fecha" name="fecha" required>
+
+      <!-- OBSERVACIONES -->
+      <label for="observaciones">Observaciones</label>
+      <textarea id="observaciones" name="observaciones"
+        placeholder="Detalle adicional del movimiento"></textarea>
+
+      <!-- TIPO DE PAGO -->
+      <label for="pago">Pago</label>
+      <select id="pago" name="pago" required>
+        <option value="">Seleccione una opcion</option>
+        <option value="Efectivo">Efectivo</option>
+        <option value="Nequi">Nequi</option>
+        <option value="CTA AHORROS">CTA AHORROS</option>
+        <option value="Otro">Otro</option>
+      </select>
+
+      <!-- VALOR EN PESOS -->
+      <label for="valor">Valor (COP)</label>
+      <input type="number" id="valor" name="valor"
+             placeholder="Ej: 50000" required>
+
+      <button type="submit">Guardar Registro</button>
+    </form>
+  </div>
+
+  <script>
+    // Generar ID automático simple (fecha + aleatorio)
+    const idField = document.getElementById("id");
+    const now = new Date();
+    const random = Math.floor(Math.random() * 1000);
+    idField.value = `ID-${now.getFullYear()}${now.getMonth()+1}${now.getDate()}-${random}`;
+  </script>
+
+</body>
+</html>
+
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -55,6 +195,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </body>
 </html>
+
 
 
 
