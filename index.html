@@ -1,5 +1,13 @@
 <script>
-  const form = document.querySelector("form");
+document.addEventListener("DOMContentLoaded", function () {
+
+  const form = document.getElementById("registroForm");
+  const idInput = document.getElementById("id");
+
+  if (!form || !idInput) {
+    console.error("Formulario o campo ID no encontrado");
+    return;
+  }
 
   function generarID() {
     const now = new Date();
@@ -7,13 +15,13 @@
     return `ID-${now.getFullYear()}${now.getMonth()+1}${now.getDate()}-${random}`;
   }
 
-  document.getElementById("id").value = generarID();
+  idInput.value = generarID();
 
-  form.addEventListener("submit", function(e) {
-    e.preventDefault();
+  form.addEventListener("submit", function (e) {
+    e.preventDefault(); // 🔑 CLAVE
 
     const data = {
-      id: document.getElementById("id").value,
+      id: idInput.value,
       concepto: document.getElementById("concepto").value,
       fecha: document.getElementById("fecha").value,
       observaciones: document.getElementById("observaciones").value,
@@ -23,22 +31,22 @@
 
     fetch("https://script.google.com/macros/s/AKfycbybs-Dxxuso6B4ohH1p_TUXx9PWF1QYIWJRj03YT31HNug7bf5L5IwcypXST9peYpLjfQ/exec", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data)
     })
     .then(res => res.json())
     .then(() => {
       alert("Registro guardado correctamente ✅");
       form.reset();
-      document.getElementById("id").value = generarID();
+      idInput.value = generarID();
     })
     .catch(err => {
       alert("Error al guardar ❌");
       console.error(err);
     });
   });
+
+});
 </script>
 
 </body>
@@ -47,6 +55,7 @@
 
 </body>
 </html>
+
 
 
 
